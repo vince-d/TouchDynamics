@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Data Sources">
+
+        <CheckBoxPreference
+            android:key="pref_rec_touch"
+            android:title="Record touch"
+            android:summary="Record touch input"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_keys"
+            android:title="Record keyboard"
+            android:summary="Record keyboard input"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_back"
+            android:title="Record back button"
+            android:summary="Record when user presses back button"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_orientation"
+            android:title="Record orientation changes"
+            android:summary="Record changes between portrait and landscape"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_acc"
+            android:title="Record accelerometer"
+            android:summary="Record change of accelerometer values"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_gyro"
+            android:title="Record gyroscope"
+            android:summary="Record change of gyroscope values"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:key="pref_rec_sound"
+            android:title="Record sound"
+            android:summary="Record volume of sound as recorded by the device microphone"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Storage">
+        <EditTextPreference
+            android:key="pref_rec_file"
+            android:title="Filename"
+            android:summary="Select a file for data storage"
+            android:defaultValue="data.csv"/>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
