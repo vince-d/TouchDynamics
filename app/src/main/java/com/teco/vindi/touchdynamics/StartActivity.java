@@ -39,7 +39,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void startButtonPressed(View view) {
-        Intent startRecordActivity = new Intent(StartActivity.this, MainActivity.class);
+        Intent startRecordActivity = new Intent(StartActivity.this, ScrollViewActivity.class);
         startActivity(startRecordActivity);
     }
 }
