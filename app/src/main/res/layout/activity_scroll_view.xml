@@ -8,7 +8,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff9c0802"
+        android:background="#ff757575"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:elevation="4dp"
         android:paddingTop="0dp"

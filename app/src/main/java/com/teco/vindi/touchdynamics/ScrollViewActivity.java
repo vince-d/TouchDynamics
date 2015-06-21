@@ -23,12 +23,65 @@ public class ScrollViewActivity extends MainActivity {
 
         // this is data fro recycler view
         ScrollViewData itemsData[] = {
-                new ScrollViewData("Help",R.drawable.help),
-                new ScrollViewData("Delete",R.drawable.content_discard),
-                new ScrollViewData("Cloud",R.drawable.collections_cloud),
-                new ScrollViewData("Favorite",R.drawable.rating_favorite),
-                new ScrollViewData("Like",R.drawable.rating_good),
-                new ScrollViewData("Rating",R.drawable.rating_important)
+                new ScrollViewData("Berlin",R.drawable.ic_map),
+                new ScrollViewData("Hamburg",R.drawable.ic_map),
+                new ScrollViewData("Muenchen",R.drawable.ic_map),
+                new ScrollViewData("Koeln",R.drawable.ic_map),
+                new ScrollViewData("Frankfurt am Main",R.drawable.ic_map),
+                new ScrollViewData("Stuttgart",R.drawable.ic_map),
+                new ScrollViewData("Duesseldorf",R.drawable.ic_map),
+                new ScrollViewData("Dortmund",R.drawable.ic_map),
+                new ScrollViewData("Essen",R.drawable.ic_map),
+                new ScrollViewData("Bremen",R.drawable.ic_map),
+                new ScrollViewData("Leipzig",R.drawable.ic_map),
+                new ScrollViewData("Dresden",R.drawable.ic_map),
+                new ScrollViewData("Hannover",R.drawable.ic_map),
+                new ScrollViewData("Nuernberg",R.drawable.ic_map),
+                new ScrollViewData("Duisburg",R.drawable.ic_map),
+                new ScrollViewData("Bochum",R.drawable.ic_map),
+                new ScrollViewData("Wuppertal",R.drawable.ic_map),
+                new ScrollViewData("Bielefeld",R.drawable.ic_map),
+                new ScrollViewData("Bonn",R.drawable.ic_map),
+                new ScrollViewData("Muenster",R.drawable.ic_map),
+                new ScrollViewData("Mannheim",R.drawable.ic_map),
+                new ScrollViewData("Augsburg",R.drawable.ic_map),
+                new ScrollViewData("Wiesbaden",R.drawable.ic_map),
+                new ScrollViewData("Gelsenkirchen",R.drawable.ic_map),
+                new ScrollViewData("Moenchengladbach",R.drawable.ic_map),
+                new ScrollViewData("Braunschweig",R.drawable.ic_map),
+                new ScrollViewData("Chemnitz",R.drawable.ic_map),
+                new ScrollViewData("Aachen",R.drawable.ic_map),
+                new ScrollViewData("Kiel",R.drawable.ic_map),
+                new ScrollViewData("Halle",R.drawable.ic_map),
+                new ScrollViewData("Krefeld",R.drawable.ic_map),
+                new ScrollViewData("Freiburg",R.drawable.ic_map),
+                new ScrollViewData("Luebeck",R.drawable.ic_map),
+                new ScrollViewData("Oberhausen",R.drawable.ic_map),
+                new ScrollViewData("Erfurt",R.drawable.ic_map),
+                new ScrollViewData("Mainz",R.drawable.ic_map),
+                new ScrollViewData("Rostock",R.drawable.ic_map),
+                new ScrollViewData("Kassel",R.drawable.ic_map),
+                new ScrollViewData("Hagen",R.drawable.ic_map),
+                new ScrollViewData("Saarbruecken",R.drawable.ic_map),
+                new ScrollViewData("Hamm",R.drawable.ic_map),
+                new ScrollViewData("Muelheim",R.drawable.ic_map),
+                new ScrollViewData("Ludwigshafen",R.drawable.ic_map),
+                new ScrollViewData("Potsdam",R.drawable.ic_map),
+                new ScrollViewData("Leverkusen",R.drawable.ic_map),
+                new ScrollViewData("Oldenburg",R.drawable.ic_map),
+                new ScrollViewData("Osnabrueck",R.drawable.ic_map),
+                new ScrollViewData("Herne",R.drawable.ic_map),
+                new ScrollViewData("Karlsruhe",R.drawable.ic_map),
+                new ScrollViewData("Neuss",R.drawable.ic_map),
+                new ScrollViewData("Heidelberg",R.drawable.ic_map),
+                new ScrollViewData("Darmstadt",R.drawable.ic_map),
+                new ScrollViewData("Paderborn",R.drawable.ic_map),
+                new ScrollViewData("Regensburg",R.drawable.ic_map),
+                new ScrollViewData("Ingolstadt",R.drawable.ic_map),
+                new ScrollViewData("Wuerzburg",R.drawable.ic_map),
+                new ScrollViewData("Wolfsburg",R.drawable.ic_map),
+                new ScrollViewData("Fuerth",R.drawable.ic_map),
+                new ScrollViewData("Ulm",R.drawable.ic_map)
         };
 
         // 2. set layoutManger
@@ -45,7 +98,7 @@ public class ScrollViewActivity extends MainActivity {
         Toolbar mToolBar = (Toolbar) findViewById(R.id.tool_bar);
         if (mToolBar != null) {
             setSupportActionBar(mToolBar);
-            getSupportActionBar().setTitle("lol");
+            getSupportActionBar().setTitle("Select city");
         }
     }
 

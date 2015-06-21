@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        // TODO: Null, because this base layout does not have any interface.
         mEditText = (EditText) findViewById(R.id.editText);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -61,45 +61,47 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Text watcher is added in onPostCreate to get around duplicate events on orientation change.
-        mEditText.addTextChangedListener(new TextWatcher() {
+        if (mEditText != null) {
+            // Text watcher is added in onPostCreate to get around duplicate events on orientation change.
+            mEditText.addTextChangedListener(new TextWatcher() {
 
-            private int textLength = 0;
+                private int textLength = 0;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String newText = "";
-                String newChar;
-
-                if (s.length() <= textLength) {
-                    newChar = "BACKSPACE";
-                } else {
-                    newChar = Character.toString(s.charAt(s.length() - 1));
+                    // TODO Auto-generated method stub
                 }
 
-                if (s.length() != 0) {
-                    newText = s.toString();
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    // TODO Auto-generated method stub
                 }
 
-                if (enabled("pref_rec_keys")) {
-                    log("Typed=\"" + newChar + "\" Text=\"" + s.toString() + "\"");
-                }
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String newText = "";
+                    String newChar;
 
-                textLength = s.length();
-            }
-        });
+                    if (s.length() <= textLength) {
+                        newChar = "BACKSPACE";
+                    } else {
+                        newChar = Character.toString(s.charAt(s.length() - 1));
+                    }
+
+                    if (s.length() != 0) {
+                        newText = s.toString();
+                    }
+
+                    if (enabled("pref_rec_keys")) {
+                        log("Typed=\"" + newChar + "\" Text=\"" + s.toString() + "\"");
+                    }
+
+                    textLength = s.length();
+                }
+            });
+        }
 
     }
 
