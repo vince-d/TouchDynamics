@@ -38,8 +38,14 @@ public class StartActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startButtonPressed(View view) {
+    public void taskOneButtonPressed(View view) {
         Intent startRecordActivity = new Intent(StartActivity.this, ScrollViewActivity.class);
         startActivity(startRecordActivity);
     }
+
+    public void taskTwoButtonPressed(View view) {
+        Intent startRecordActivity = new Intent(StartActivity.this, ScrollViewActivity.class);
+        startActivity(startRecordActivity);
+    }
+
 }
