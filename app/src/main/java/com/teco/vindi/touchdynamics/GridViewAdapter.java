@@ -3,6 +3,7 @@ package com.teco.vindi.touchdynamics;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,12 +46,15 @@ public class GridViewAdapter extends ArrayAdapter {
         ImageItem item = (ImageItem) data.get(position);
         holder.imageTitle.setText(item.getTitle());
         holder.image.setImageBitmap(item.getImage());
+        holder.image.setBackgroundColor(item.getColor());
 
         return row;
     }
 
+
     static class ViewHolder {
         TextView imageTitle;
         ImageView image;
+        Color color;
     }
 }
