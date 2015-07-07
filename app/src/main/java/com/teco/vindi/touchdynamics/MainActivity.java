@@ -32,13 +32,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, SoundMeter.SoundLevelListener {
 
     private static final String _TAG = MainActivity.class.getName();
 
-    private EditText mEditText;
+
     private SensorManager mSensorManager;
     private SoundMeter mSoundMeter;
 
@@ -46,12 +47,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private CSVWriter csv;
 
+    private String mTaskName = _TAG;
+
+    public void setTaskName(String taskName) {
+        mTaskName = taskName;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: Null, because this base layout does not have any interface.
-        mEditText = (EditText) findViewById(R.id.editText);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -71,53 +76,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         closeCSV();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
 
-        if (mEditText != null) {
-            // Text watcher is added in onPostCreate to get around duplicate events on orientation change.
-            mEditText.addTextChangedListener(new TextWatcher() {
-
-                private int textLength = 0;
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    String newText = "";
-                    String newChar;
-
-                    if (s.length() <= textLength) {
-                        newChar = "BACKSPACE";
-                    } else {
-                        newChar = Character.toString(s.charAt(s.length() - 1));
-                    }
-
-                    if (s.length() != 0) {
-                        newText = s.toString();
-                    }
-
-                    if (enabled("pref_rec_keys")) {
-                        writeToCSV("keyboard", "typed=\"" + newChar + "\" text=\"" + s.toString() + "\"");
-                    }
-
-                    textLength = s.length();
-                }
-            });
-        }
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -156,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (enabled("pref_rec_touch")) {
             float x = motionEvent.getX();
             float y = motionEvent.getY();
-            writeToCSV("touch", x + "", y + "");
+            writeToCSV("touch", String.format(Locale.GERMAN, "%f", x), String.format(Locale.GERMAN, "%f", y));
         }
        return super.dispatchTouchEvent(motionEvent);
     }
@@ -197,12 +156,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void record_acc(SensorEvent sensorEvent) {
         if (enabled("pref_rec_acc"))
-            writeToCSV("accelerometer", sensorEvent.values[0] + "", sensorEvent.values[1] + "", sensorEvent.values[2] + "");
+            writeToCSV("accelerometer", String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[1]),
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]));
     }
 
     private void record_gyro(SensorEvent sensorEvent) {
         if (enabled("pref_rec_gyro"))
-            writeToCSV("gyroscope", sensorEvent.values[0] + "", sensorEvent.values[1] + "", sensorEvent.values[2] + "");
+            writeToCSV("gyroscope", String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[1]),
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]));
     }
 
     @Override
@@ -221,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSoundLevelChanged(double soundLevel) {
         if (enabled("pref_rec_sound"))
-            writeToCSV("sound", "" + soundLevel);
+            writeToCSV("sound", String.format(Locale.GERMAN, "%f", soundLevel));
     }
 
 
@@ -229,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void openCSV() {
         try {
             csvDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
-            csvDir += "/TouchDynamics/" +"record_" + System.currentTimeMillis() + ".csv";
+            csvDir += "/TouchDynamics/" + mTaskName + "_" + System.currentTimeMillis() + ".csv";
 
             csv = new CSVWriter(new FileWriter(csvDir), ';');
             String[] entries = {"time", "type", "value_x", "value_y", "value_z", "value_other"};

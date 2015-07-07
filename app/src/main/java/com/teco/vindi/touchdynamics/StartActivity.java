@@ -15,6 +15,8 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+
     }
 
     @Override
@@ -39,12 +41,12 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void taskOneButtonPressed(View view) {
-        Intent startRecordActivity = new Intent(StartActivity.this, ScrollViewActivity.class);
+        Intent startRecordActivity = new Intent(StartActivity.this, PictureDescriptionActivity.class);
         startActivity(startRecordActivity);
     }
 
     public void taskTwoButtonPressed(View view) {
-        Intent startRecordActivity = new Intent(StartActivity.this, ScrollViewActivity.class);
+        Intent startRecordActivity = new Intent(StartActivity.this, PictureSelectionActivity.class);
         startActivity(startRecordActivity);
     }
 

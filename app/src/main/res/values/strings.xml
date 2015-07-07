@@ -4,4 +4,27 @@
     <string name="action_settings">Settings</string>
     <string name="activity_config_title">Settings</string>
     <string name="title_activity_scroll_view">ScrollViewActivity</string>
+    <string name="title_activity_picture_description">PictureDescriptionActivity</string>
+    <string name="title_activity_picture_selection">PictureSelectionActivity</string>
+
+    <string-array name="image_ids">
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_3</item>
+        <item>@drawable/image_4</item>
+        <item>@drawable/image_5</item>
+        <item>@drawable/image_6</item>
+        <item>@drawable/image_7</item>
+        <item>@drawable/image_8</item>
+        <item>@drawable/image_9</item>
+        <item>@drawable/image_1</item>
+        <item>@drawable/image_2</item>
+        <item>@drawable/image_3</item>
+        <item>@drawable/image_4</item>
+        <item>@drawable/image_5</item>
+        <item>@drawable/image_6</item>
+        <item>@drawable/image_7</item>
+        <item>@drawable/image_8</item>
+        <item>@drawable/image_9</item>
+    </string-array>
 </resources>
