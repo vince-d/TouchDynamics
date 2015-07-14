@@ -21,6 +21,7 @@ public class PictureDescriptionActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_description);
 
+        //sample
         mEditText = (EditText) findViewById(R.id.editText);
         mPicture = (ImageView) findViewById(R.id.imageView);
         if (mPictureSetOne) {
