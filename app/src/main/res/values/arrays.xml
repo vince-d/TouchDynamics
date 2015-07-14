@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="groups">
+        <item>A (Keine CL zuerst, Bilderset 1 zuerst)</item>
+        <item>B (CL zuerst, Bilderset 1 zuerst)</item>
+        <item>C (Keine CL zuerst, und Bilderset 2 zuerst)</item>
+        <item>D (CL zuerst, Bilderset 2 zuerst)</item>
+    </string-array>
+
+    <string-array name="groups_alias">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+</resources>

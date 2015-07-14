@@ -1,30 +1,21 @@
 package com.teco.vindi.touchdynamics;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.EditText;
 
 import com.opencsv.CSVWriter;
 
@@ -49,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private String mTaskName = _TAG;
 
+    public boolean mCognitiveLoad;
+    public String mGroup;
+    public boolean mPictureSetOne;
+
+
     public void setTaskName(String taskName) {
         mTaskName = taskName;
     }
@@ -64,6 +60,29 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mSoundMeter = new SoundMeter();
         mSoundMeter.registerListener(this);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        mCognitiveLoad = preferences.getBoolean("pref_cogload", false);
+        mGroup = preferences.getString("pref_group", "A");
+
+        if (mGroup.equals("A") && mCognitiveLoad == false) {
+            mPictureSetOne = true;
+        } else if (mGroup.equals("A") && mCognitiveLoad == true) {
+            mPictureSetOne = false;
+        } else if (mGroup.equals("B") && mCognitiveLoad == false) {
+            mPictureSetOne = false;
+        } else if (mGroup.equals("B") && mCognitiveLoad == true) {
+            mPictureSetOne = true;
+        } else if (mGroup.equals("C") && mCognitiveLoad == false) {
+            mPictureSetOne = false;
+        } else if (mGroup.equals("C") && mCognitiveLoad == true) {
+            mPictureSetOne = true;
+        } else if (mGroup.equals("D") && mCognitiveLoad == false) {
+            mPictureSetOne = true;
+        } else if (mGroup.equals("D") && mCognitiveLoad == true) {
+            mPictureSetOne = false;
+        }
 
         openCSV();
     }
@@ -191,8 +210,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void openCSV() {
         try {
+            String CL = "NoCL";
+            if (mCognitiveLoad) {
+                CL = "CL";
+            }
+
             csvDir = android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
-            csvDir += "/TouchDynamics/" + mTaskName + "_" + System.currentTimeMillis() + ".csv";
+            csvDir += "/TouchDynamics/" + mGroup + "_" + CL + "_" + mTaskName + "_" + System.currentTimeMillis() + ".csv";
 
             csv = new CSVWriter(new FileWriter(csvDir), ';');
             String[] entries = {"time", "type", "value_x", "value_y", "value_z", "value_other"};

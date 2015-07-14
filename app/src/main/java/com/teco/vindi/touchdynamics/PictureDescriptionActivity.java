@@ -1,17 +1,19 @@
 package com.teco.vindi.touchdynamics;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 
 public class PictureDescriptionActivity extends MainActivity {
 
     private EditText mEditText;
+    private ImageView mPicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTaskName("TextWritingTask");
@@ -20,6 +22,12 @@ public class PictureDescriptionActivity extends MainActivity {
         setContentView(R.layout.activity_picture_description);
 
         mEditText = (EditText) findViewById(R.id.editText);
+        mPicture = (ImageView) findViewById(R.id.imageView);
+        if (mPictureSetOne) {
+            mPicture.setImageResource(R.drawable.cat_describe);
+        } else {
+            mPicture.setImageResource(R.drawable.dog_describe);
+        }
     }
 
     @Override

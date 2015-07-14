@@ -1,15 +1,10 @@
 package com.teco.vindi.touchdynamics;
 
-import android.content.res.AssetManager;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -78,8 +73,14 @@ public class PictureSelectionActivity extends MainActivity {
                 }
 
                 String name = getResources().getResourceEntryName(resourceId);
+                char pictureSetStartChar;
 
-                if ((name.charAt(0)) == 'a' && (name.charAt(1)) == '_') {
+                if (mPictureSetOne == true) {
+                    pictureSetStartChar = 'a';
+                } else {
+                    pictureSetStartChar = 'b';
+                }
+                if ((name.charAt(0)) == pictureSetStartChar && (name.charAt(1)) == '_') {
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resourceId);
                     imageItems.add(new ImageItem(bitmap, "", Color.argb(0, 0, 0, 0)));
                 }

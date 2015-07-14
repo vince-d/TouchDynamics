@@ -2,58 +2,63 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Data Sources">
+        android:title="Gruppe">
+        <ListPreference
+            android:key="pref_group"
+            android:title="Gruppe"
+            android:entries="@array/groups"
+            android:entryValues="@array/groups_alias"/>
+        <CheckBoxPreference
+            android:key="pref_cogload"
+            android:title="CL"
+            android:summary="CL vorhanden?"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Datenquellen">
 
         <CheckBoxPreference
             android:key="pref_rec_touch"
-            android:title="Record touch"
-            android:summary="Record touch input"
+            android:title="Touch"
+            android:summary="Touch aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_keys"
-            android:title="Record keyboard"
-            android:summary="Record keyboard input"
+            android:title="Keyboard"
+            android:summary="Soft Keyboard aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_back"
-            android:title="Record back button"
-            android:summary="Record when user presses back button"
+            android:title="Back button"
+            android:summary="Back Button aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_orientation"
-            android:title="Record orientation changes"
-            android:summary="Record changes between portrait and landscape"
+            android:title="Orientation changes"
+            android:summary="Smartphone-Drehungen aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_acc"
-            android:title="Record accelerometer"
-            android:summary="Record change of accelerometer values"
+            android:title="Accelerometer"
+            android:summary="Accelerometer aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_gyro"
-            android:title="Record gyroscope"
-            android:summary="Record change of gyroscope values"
+            android:title="Gyroscope"
+            android:summary="Gyroscope aufnehmen"
             android:defaultValue="true"/>
 
         <CheckBoxPreference
             android:key="pref_rec_sound"
-            android:title="Record sound"
-            android:summary="Record volume of sound as recorded by the device microphone"
+            android:title="Volume"
+            android:summary="Außenlautstärke aufnehmen"
             android:defaultValue="true"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="Storage">
-        <EditTextPreference
-            android:key="pref_rec_file"
-            android:title="Filename"
-            android:summary="Select a file for data storage"
-            android:defaultValue="data.csv"/>
     </PreferenceCategory>
 
 
