@@ -70,7 +70,7 @@ public class PictureDescriptionActivity extends MainActivity {
                     }
 
                     if (enabled("pref_rec_keys")) {
-                        writeToCSV("keyboard", "typed=\"" + newChar + "\" text=\"" + s.toString() + "\"");
+                        writeToCSV("keyboard", null, null, null, null, null, null, null, null,  "typed=\"" + newChar + "\" text=\"" + s.toString() + "\"", null, null);
                     }
 
                     textLength = s.length();

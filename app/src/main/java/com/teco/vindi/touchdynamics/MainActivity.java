@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public String mGroup;
     public boolean mPictureSetOne;
 
+    DecimalFormat df;
+    long timestamp = 0;
 
     public void setTaskName(String taskName) {
         mTaskName = taskName;
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        df = new DecimalFormat("#");
+        df.setMaximumFractionDigits(0);
+
+        timestamp = System.currentTimeMillis();
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -104,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (!enabled("pref_rec_back"))
             return;
 
-        writeToCSV("button", "back");
+        writeToCSV("button", null, null, null, null, null, null, null, null, null, "back", null);
     }
 
     @Override
@@ -134,7 +140,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (enabled("pref_rec_touch")) {
             float x = motionEvent.getX();
             float y = motionEvent.getY();
-            writeToCSV("touch", String.format(Locale.GERMAN, "%f", x), String.format(Locale.GERMAN, "%f", y));
+            writeToCSV("touch", null, null, null, null, null, null,
+                        String.format(Locale.GERMAN, "%f", x), String.format(Locale.GERMAN, "%f", y),
+                        null, null, null);
         }
        return super.dispatchTouchEvent(motionEvent);
     }
@@ -143,19 +151,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onConfigurationChanged(Configuration myConfig) {
         super.onConfigurationChanged(myConfig);
 
+        // Rotation is not used.
+
         if (!enabled("pref_rec_orientation"))
             return;
 
         int orient = getResources().getConfiguration().orientation;
         switch(orient) {
             case Configuration.ORIENTATION_LANDSCAPE:
-                writeToCSV("rotated", "landscape");
+                //writeToCSV("rotated", "landscape");
                 break;
             case Configuration.ORIENTATION_PORTRAIT:
-                writeToCSV("rotated", "portrait");
+                //writeToCSV("rotated", "portrait");
                 break;
             default:
-                writeToCSV("rotated", "unknown");
+                //writeToCSV("rotated", "unknown");
         }
     }
 
@@ -175,16 +185,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void record_acc(SensorEvent sensorEvent) {
         if (enabled("pref_rec_acc"))
-            writeToCSV("accelerometer", String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
+            writeToCSV("accelerometer",
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
                     String.format(Locale.GERMAN, "%f", sensorEvent.values[1]),
-                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]));
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]),
+                    null, null, null, null, null, null, null, null);
     }
 
     private void record_gyro(SensorEvent sensorEvent) {
         if (enabled("pref_rec_gyro"))
-            writeToCSV("gyroscope", String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
+            writeToCSV("gyroscope", null, null, null,
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[0]),
                     String.format(Locale.GERMAN, "%f", sensorEvent.values[1]),
-                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]));
+                    String.format(Locale.GERMAN, "%f", sensorEvent.values[2]),
+                    null, null, null, null, null);
     }
 
     @Override
@@ -203,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSoundLevelChanged(double soundLevel) {
         if (enabled("pref_rec_sound"))
-            writeToCSV("sound", String.format(Locale.GERMAN, "%f", soundLevel));
+            writeToCSV("sound", null, null, null, null, null, null, null, null, null, null, String.format(Locale.GERMAN, "%f", soundLevel));
     }
 
 
@@ -219,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             csvDir += "/TouchDynamics/" + mGroup + "_" + CL + "_" + mTaskName + "_" + System.currentTimeMillis() + ".csv";
 
             csv = new CSVWriter(new FileWriter(csvDir), ';');
-            String[] entries = {"time", "type", "value_x", "value_y", "value_z", "value_other"};
+            String[] entries = {"time", "type", "acc_x", "acc_y", "acc_z", "gyr_x", "gyr_y", "gyr_z", "touch_x", "touch_y", "keyboard", "button", "sound"};
             csv.writeNext(entries);
         } catch (IOException e) {
             e.printStackTrace();
@@ -235,30 +249,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    public void writeToCSV( String eventType, String eventValue) {
-        DecimalFormat df = new DecimalFormat("#");
-        df.setMaximumFractionDigits(0);
+    public void writeToCSV(String type, String acc_x, String acc_y, String acc_z, String gyr_x, String gyr_y, String gyr_z, String touch_x, String touch_y, String keyboard, String button, String sound) {
+
         long timestamp = System.currentTimeMillis();
 
-        String[] entries = {""+ timestamp, eventType, null, null, null, eventValue};
-        csv.writeNext(entries);
-    }
-
-    public void writeToCSV(String eventType, String eventValueX, String eventValueY) {
-        DecimalFormat df = new DecimalFormat("#");
-        df.setMaximumFractionDigits(0);
-        long timestamp = System.currentTimeMillis();
-
-        String[] entries = {""+ timestamp, eventType, eventValueX, eventValueY, null, null};
-        csv.writeNext(entries);
-    }
-
-    public void writeToCSV(String eventType, String eventValueX, String eventValueY, String eventValueZ) {
-        DecimalFormat df = new DecimalFormat("#");
-        df.setMaximumFractionDigits(0);
-        long timestamp = System.currentTimeMillis();
-
-        String[] entries = {""+ timestamp, eventType, eventValueX, eventValueY, eventValueZ, null};
+        String[] entries = {""+ timestamp, type, acc_x, acc_y, acc_z, gyr_x, gyr_y, gyr_z, touch_x, touch_y, keyboard, button, sound};
         csv.writeNext(entries);
     }
 }
