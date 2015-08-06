@@ -11,18 +11,31 @@ import android.widget.GridView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class PictureSelectionActivity extends MainActivity {
     private GridView gridView;
     private GridViewAdapter gridAdapter;
 
+    private List<Integer> selected;
+    private int[] correct;
+    private int[] correctSet1 = {12,13,21,44,56,60,66,81,104,107};
+    private int[] correctSet2 = { 2, 5, 8,24,32,33,49,54, 67,107};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTaskName("MenuNavigationTask");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_selection);
+
+        selected = new LinkedList<>();
+        if (mPictureSetOne) {
+            correct = correctSet1;
+        } else {
+            correct = correctSet2;
+        }
 
         gridView = (GridView) findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, getData());
@@ -37,12 +50,37 @@ public class PictureSelectionActivity extends MainActivity {
                     item.setTitle(" ");
                     item.setColor(Color.rgb(122, 255, 122));
                     gridAdapter.notifyDataSetChanged();
+                    selected.add(position);
                 } else {
                     item.setTitle("");
-                    Color.argb(0, 0, 0, 0);
+                    item.setColor(Color.argb(0, 0, 0, 0));
                     gridAdapter.notifyDataSetChanged();
+                    if (selected.contains(position)) {
+                        selected.remove(selected.indexOf(position));
+                    }
                 }
 
+                boolean allCorrect = true;
+
+                if (selected.size() == correct.length) {
+                    for (int i : correct) {
+                        if (selected.contains(i)) {
+                            // Correct picture selected.
+                        } else {
+                            // At least one was wrong.
+                            allCorrect = false;
+                        }
+                    }
+                } else {
+                    allCorrect = false;
+                }
+
+                // All correct pictures were selected. End task.
+                if (allCorrect) {
+                    onBackPressed();
+                }
+
+                Log.d("bb", "" + position);
             }
         });
 
